@@ -15,33 +15,33 @@
 </head>
 <body>
 <%
-  String aStr = request.getParameter("a");
-  String bStr = request.getParameter("b");
-  String cStr = request.getParameter("c");
+  String a = request.getParameter("a");
+  String b = request.getParameter("b");
+  String c = request.getParameter("c");
 
-  if (aStr != null && bStr != null && cStr != null) {
+  if (a != null && b != null && c != null) {
     try {
-      BigDecimal a = new BigDecimal(aStr);
-      BigDecimal b = new BigDecimal(bStr);
-      BigDecimal c = new BigDecimal(cStr);
+      BigDecimal A = new BigDecimal(a);
+      BigDecimal B = new BigDecimal(b);
+      BigDecimal C = new BigDecimal(c);
 
-      if (a.compareTo(BigDecimal.ZERO) == 0) {
+      if (A.compareTo(BigDecimal.ZERO) == 0) {
         out.println("<p>Error: 'a' no puede ser 0 en una ecuación de segundo grado.</p>");
       } else {
         MathContext mc = new MathContext(20, RoundingMode.HALF_UP);
 
-        BigDecimal bCuadrado = b.pow(2, mc);
-        BigDecimal cuatroAC = a.multiply(c, mc).multiply(new BigDecimal("4"), mc);
-        BigDecimal discriminante = bCuadrado.subtract(cuatroAC, mc);
+        BigDecimal Cuadrado = B.pow(2, mc);
+        BigDecimal cuatro = A.multiply(C, mc).multiply(new BigDecimal("4"), mc);
+        BigDecimal disc = Cuadrado.subtract(cuatro, mc);
 
-        if (discriminante.compareTo(BigDecimal.ZERO) < 0) {
+        if (disc.compareTo(BigDecimal.ZERO) < 0) {
           out.println("<p>No tiene raíces reales: el discriminante es negativo.</p>");
         } else {
-          BigDecimal sqrtDiscriminant = new BigDecimal(Math.sqrt(discriminante.doubleValue()), mc);
-          BigDecimal twoA = a.multiply(new BigDecimal("2"), mc);
+          BigDecimal sqrtDiscriminant = new BigDecimal(Math.sqrt(disc.doubleValue()), mc);
+          BigDecimal twoA = A.multiply(new BigDecimal("2"), mc);
 
-          BigDecimal root1 = b.negate(mc).add(sqrtDiscriminant, mc).divide(twoA, mc);
-          BigDecimal root2 = b.negate(mc).subtract(sqrtDiscriminant, mc).divide(twoA, mc);
+          BigDecimal root1 = B.negate(mc).add(sqrtDiscriminant, mc).divide(twoA, mc);
+          BigDecimal root2 = B.negate(mc).subtract(sqrtDiscriminant, mc).divide(twoA, mc);
 
           out.println("<p>Las raíces de la ecuación son:</p>");
           out.println("<ul>");
